@@ -33,6 +33,9 @@ def simulate_dark_veil_rolls(num_dice, num_rolls, num_simulations=10000):
                         elif new_roll >= 5:
                             successes += 1
                             break
+                        elif new_roll == 1:
+                            burned_dice.add(die)
+                            break
                         else:
                             break
                 elif rolls[i] == 5:
