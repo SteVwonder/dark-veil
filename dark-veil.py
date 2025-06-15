@@ -6,17 +6,19 @@ def simulate_dark_veil_rolls(num_dice, num_rolls, num_simulations=10000):
     """
     Simulate Dark Veil dice rolls.
     Returns a list of success counts from all simulations.
+    -1 menas a critical failure happened (all dice were burned)
     """
     all_successes = []
     
     for _ in range(num_simulations):
         successes = 0
         burned_dice = set()  # Track which dice positions are burned
+        active_dice = []
         
         for roll in range(num_rolls):
             # Roll all non-burned dice
             active_dice = [i for i in range(num_dice) if i not in burned_dice]
-            if not active_dice:
+            if len(active_dice) == 0:
                 break
                 
             rolls = np.random.randint(1, 7, size=len(active_dice))
@@ -43,6 +45,8 @@ def simulate_dark_veil_rolls(num_dice, num_rolls, num_simulations=10000):
                 elif rolls[i] == 1:
                     burned_dice.add(die)
         
+        if len(burned_dice) == num_dice:
+            successes = -1
         all_successes.append(successes)
     
     return all_successes
@@ -58,13 +62,22 @@ def plot_probability_distribution(success_counts, num_dice, num_rolls, max_succe
     x = sorted(counts.keys())
     y = [counts[k] / total for k in x]
     
+    # Create custom x-axis labels
+    x_labels = []
+    for val in x:
+        if val == -1:
+            x_labels.append('Crit Fail')
+        else:
+            x_labels.append(str(val))
+    
     # Plot with bars shifted right by 0.5
     plt.bar([val + 0.5 for val in x], y, width=0.75)
     plt.title(f'{num_dice} dice, {num_rolls} rolls')
     plt.xlabel('Number of Successes')
     plt.ylabel('Probability')
-    plt.xlim(0, max_successes)
+    plt.xlim(-1.5, max_successes + 0.5)  # Adjust x-axis to include -1
     plt.ylim(0, max_probability)  # Set consistent y-axis limit
+    plt.xticks([val + 0.5 for val in x], x_labels, rotation=90)
     plt.grid(True, alpha=0.3)
 
 def main():
