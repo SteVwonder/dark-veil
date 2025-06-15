@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import defaultdict
+import argparse
 
 def simulate_dark_veil_rolls(num_dice, num_rolls, num_simulations=10000):
     """
@@ -81,6 +82,10 @@ def plot_probability_distribution(success_counts, num_dice, num_rolls, max_succe
     plt.grid(True, alpha=0.3)
 
 def main():
+    parser = argparse.ArgumentParser(description="Simulate and plot Dark Veil dice rolls.")
+    parser.add_argument('--plot', action='store_true', help='Save the plot to dark-veil.png instead of displaying it')
+    args = parser.parse_args()
+
     # Parameters to test
     dice_counts = [1, 2, 3, 4, 5]
     roll_counts = [1, 2, 3]
@@ -121,7 +126,11 @@ def main():
             plot_probability_distribution(success_counts, num_dice, num_rolls, max_successes, max_probability)
     
     plt.tight_layout()
-    plt.show()
+    if args.plot:
+        plt.savefig('dark-veil.png')
+        print('Plot saved to dark-veil.png')
+    else:
+        plt.show()
 
 if __name__ == "__main__":
     main()
