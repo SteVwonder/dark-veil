@@ -75,7 +75,7 @@ def plot_probability_distribution(success_counts, num_dice, num_rolls, max_succe
     
     # Plot with bars shifted right by 0.5
     bars = plt.bar([val + 0.5 for val in x], y, width=0.75)
-    plt.title(f'{num_dice} dice, {num_rolls} rolls')
+    plt.title(f'{num_dice} dice, {num_rolls} actions')
     plt.xlabel('Number of Successes')
     plt.ylabel('Probability')
     plt.xlim(-1.5, max_successes + 0.5)  # Adjust x-axis to include -1

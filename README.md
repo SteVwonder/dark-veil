@@ -1,6 +1,6 @@
 # Dark Veil Dice Roll Simulator
 
-This Python script simulates and visualizes the probability distribution of dice rolls in the Dark Veil system. It helps understand the statistical outcomes of different combinations of dice and rolls.
+This Python script simulates and visualizes the probability distribution of dice rolls in the Dark Veil system. It helps understand the statistical outcomes of different combinations of dice and actions.
 
 ## Features
 
@@ -12,7 +12,7 @@ This Python script simulates and visualizes the probability distribution of dice
   - If all dice are burned, it's a critical failure
 - Generates probability distributions for different combinations of:
   - Number of dice (1-5)
-  - Number of rolls (1-3)
+  - Number of actions (1-3)
 - Creates a comprehensive visualization showing all combinations
 
 ## Usage
@@ -31,7 +31,7 @@ python dark-veil.py --plot
 
 ## Example Output
 
-The script generates a plot showing the probability distribution for each combination of dice and rolls:
+The script generates a plot showing the probability distribution for each combination of dice and actions:
 
 ![Dark Veil Probability Distribution](dark-veil.png)
 
